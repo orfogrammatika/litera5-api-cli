@@ -1,0 +1,81 @@
+{
+	"name": "litera5-api-cli",
+	"version": "0.0.0-development",
+	"description": "A template for creating npm CLI tools using TypeScript and VSCode",
+	"license": "MIT",
+	"engines": {
+		"node": ">=12.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ryansonshine/typescript-npm-cli-template.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryansonshine/typescript-npm-cli-template/issues"
+	},
+	"homepage": "https://github.com/ryansonshine/typescript-npm-cli-template#readme",
+	"author": {
+		"name": "Ryan Sonshine",
+		"email": "ryansonshine@users.noreply.github.com",
+		"url": "https://github.com/ryansonshine"
+	},
+	"keywords": [
+		"boilerplate",
+		"cli",
+		"template",
+		"typescript",
+		"vscode",
+		"jest",
+		"husky",
+		"commitizen",
+		"semantic-release",
+		"codecov"
+	],
+	"bin": {
+		"l5-api": "./bin/index.js"
+	},
+	"files": [
+		"!lib/__tests__/**/*",
+		"lib/**/*",
+		"bin/**/*"
+	],
+	"scripts": {
+		"build": "tsc",
+		"clean": "rm -rf ./lib/",
+		"lint": "eslint ./src/ --fix",
+		"test": "jest --coverage",
+		"test:watch": "jest --watch",
+		"typecheck": "tsc --noEmit",
+		"watch": "tsc -w"
+	},
+	"dependencies": {
+		"commander": "^7.2.0",
+		"js-logger": "^1.6.1",
+		"js-yaml": "^4.1.0",
+		"jsdom": "^19.0.0",
+		"litera5-api-js-client": "orfogrammatika/litera5-api-js-client",
+		"lodash": "^4.17.21",
+		"ogxt-utils": "orfogrammatika/ogxt-utils"
+	},
+	"devDependencies": {
+		"@types/jsdom": "^16.2.14",
+		"@types/jest": "^26.0.24",
+		"@types/js-yaml": "^4.0.5",
+		"@types/lodash": "^4.14.180",
+		"@types/node": "^12.20.11",
+		"@typescript-eslint/eslint-plugin": "^4.22.0",
+		"@typescript-eslint/parser": "^4.22.0",
+		"chalk": "^4.1.1",
+		"codecov": "^3.8.1",
+		"eslint": "^7.25.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^3.4.0",
+		"execa": "^5.1.1",
+		"jest": "^27.2.0",
+		"prettier": "^2.2.1",
+		"ts-jest": "^27.0.5",
+		"ts-node": "^10.2.1",
+		"typescript": "^4.2.4"
+	}
+}
