@@ -1,68 +1,114 @@
-# typescript-npm-cli-template
+Консольное приложение API Литера5
+=================================
 
-> Boilerplate to kickstart creating a Node.js command-line tool
+Приложение предназначено для работы с API Литера5, как с его облачными серверами https://litera5.ru, так и с его 
+локальными автономными версиями.
 
-Inspired by [node-cli-boilerplate](https://github.com/sindresorhus/node-cli-boilerplate)
+Его можно использовать для проверки настроек и отладки собственныю процедур интеграции, так и в качестве примера
+использования JavaScript/TypeScript клиента API.
 
-## Getting started
+Установка
+---------
 
-**Click the "Use this template" button.**
+### Глобальная установка
 
-Alternatively, create a new directory and then run:
+Установка приложения `l5-api` в операционную систему. Этот вариант подходит тем, кому нет необходимости разбираться с
+программным кодом приложения, и нужна лишь его функциональность. Тогда все исполняемые файлы будут установлены в
+операционную систему и пользователь сможет выполнять программу для достижения собственных целей.
 
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-cli-template/archive/main.tar.gz | tar -xz --strip-components=1
+```shell
+npm install --global orfogrammatika/litera5-api-cli
 ```
 
-**Remove everything from here and above**
+После установки пользователю становится доступной команда `l5-api`.
 
----
+### Локальная установка
 
-# my-cli-name
+Локальная установка предполагает доступ к исходникам, возможно внесение в них каких-то изменений, улучшений. В этом 
+варианте пользователю нужно выполнить следующие команды:
 
-[![npm package][npm-img]][npm-url]
-[![Build Status][build-img]][build-url]
-[![Downloads][downloads-img]][downloads-url]
-[![Issues][issues-img]][issues-url]
-[![Code Coverage][codecov-img]][codecov-url]
-[![Commitizen Friendly][commitizen-img]][commitizen-url]
-[![Semantic Release][semantic-release-img]][semantic-release-url]
-
-> My awesome command-line tool
-
-## Install
-
-```bash
-npm install my-cli-name
+```shell
+> git clone git@github.com:orfogrammatika/litera5-api-cli.git
+> cd litera5-api-cli
+> yarn
 ```
 
-## Usage
+После такой установки можно выполнять команды `yarn start` с теми же ключами что и для команды `l5-api`, только 
+программа будет собираться из текущей версии исходников.
 
-```bash
-Usage: my-command [options]
+Использование
+-------------
+
+Несколько замечаний общего характера.
+
+Для работы с API нужны некоторые общие (универсальные) настройки, а именно нужен URL сервера,
+имя клиенти и секретный ключ. Имя клиента и секретный ключ получаются в службе поддержки Литеры
+при подключении. Есть два пути настройки, записать их в файл или передать программке отдельными 
+параметрами. Можно передать и то и то, тогда переданные отдельными параметрами значения победят
+значения записанные в файле.
+
+Файл можно сделать двух форматов (какой больше нравится) JSON или YAML. Это касается всех 
+файлов настроек, как общих, так и параметров запросов.
+
+Параметры конкретных команд тоже можно передать двумя путями. Можно передать их в виде 
+параметра `--json '{"key": "value"}'` либо через файлик с параметрами запроса 
+`--file some-request.yml`. Во всех случаях работает принцип, сначала берутся значения из файла
+и затем переписываются значениями из отдельных параметров, если они существуют.
+
+На этом базовые принципы заканчиваются.
+
+А для всяких подробностей есть:
+
+```shell
+> l5-api --help
+Usage: l5-api [options] [command]
+
+Консольный клиент для работы с API Литера5
 
 Options:
-  -V, --version            output the version number
-  -d, --debug              enables verbose logging (default: false)
-  -v, --verbose            enables verbose logging (default: false)
+  -V, --version              output the version number
+  -d, --debug                включает дополнительные отладочные сообщения (default: false)
+  -u, --url <string>         базовый адрес сервера
+  -l, --client <strint>      имя входа клиента
+  -s, --secret <string>      секретный ключ клиента
+  -c, --cfg <json-yml-file>  JSON/YML файл с настройками API
+  -h, --help                 display help for command
 
-Examples:
-
-  $ my-command --version
-  1.0.0
+Commands:
+  setup [options]            Работа с настройками.
+  user [options]             Создание нового пользователя или настройка существующего
+  check [options]            Запуск интерактивной проверки документа
+  check-ogxt [options]       Неинтерактивная проверка документа, запрос, ожидание результатов, 
+                             запись результатов проверки в файл.
+  help [command]             display help for command
 ```
 
-[build-img]:https://github.com/ryansonshine/typescript-npm-cli-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-cli-template/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-cli-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-cli-template
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-cli-template
-[npm-url]:https://www.npmjs.com/package/typescript-npm-cli-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-cli-template
-[issues-url]:https://github.com/ryansonshine/typescript-npm-cli-template/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/typescript-npm-cli-template/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/typescript-npm-cli-template
-[semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]:https://github.com/semantic-release/semantic-release
-[commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]:http://commitizen.github.io/cz-cli/
+Если этого не достаточно, то пишите вопросы/пожелания тут:
+[litera5-api-cli/issues](https://github.com/orfogrammatika/litera5-api-cli/issues), будем дорабатывать.
+
+Примеры
+-------
+
+В примерах использована команда `l5-api` как для варианта глобальной установки. В случае же локальной установки можно
+все `l5-api` заменить на `yarn start`.
+
+В каталоге `examples` собраны примеры файлов конфигурации и запросов. Подробная документация по самой API, запросам
+и их содержимому доступна тут: [litera5-api-doc](https://github.com/orfogrammatika/litera5-api-doc).
+
+### Настройка API ###
+
+```shell
+l5-api --cfg examples/cfg.yml setup --file examples/setup.yml
+```
+
+### Просмотр настроек API ###
+
+```shell
+l5-api --cfg examples/cfg.yml setup
+```
+
+### Проверка документа и получение результатов проверки ###
+
+```shell
+l5-api --cfg examples/cfg.yml check-ogxt --file examples/check.yml --html examples/check.html
+```

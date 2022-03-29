@@ -1,0 +1,21 @@
+---
+login: test
+name: Test API User
+password: 123456
+permissions:
+  - USE_DICTIONARY
+  - DISABLE_CICERO
+orthoKinds:
+  - SPELLING
+  - GRAMMAR
+  - PUNCTUATION
+ciceroKinds:
+  - TAUTOLOGY
+  - PHONICS
+  - ORTHOEPY
+qualityKinds:
+  - WATER
+checksOrtho: -1
+checksCicero: -1
+checksQuality: -1
+checksTotal: -1

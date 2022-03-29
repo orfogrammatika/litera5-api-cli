@@ -1,35 +1,32 @@
 {
 	"name": "litera5-api-cli",
-	"version": "0.0.0-development",
-	"description": "A template for creating npm CLI tools using TypeScript and VSCode",
-	"license": "MIT",
+	"version": "1.0.0",
+	"description": "Приложание командной строки для работы с API Литера5",
+	"license": "GPL-3.0",
 	"engines": {
 		"node": ">=12.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ryansonshine/typescript-npm-cli-template.git"
+		"url": "git+ssh://git@github.com/orfogrammatika/litera5-api-cli.git"
 	},
 	"bugs": {
-		"url": "https://github.com/ryansonshine/typescript-npm-cli-template/issues"
+		"url": "https://github.com/orfogrammatika/litera5-api-cli/issues"
 	},
-	"homepage": "https://github.com/ryansonshine/typescript-npm-cli-template#readme",
+	"homepage": "https://github.com/orfogrammatika/litera5-api-cli#readme",
 	"author": {
-		"name": "Ryan Sonshine",
-		"email": "ryansonshine@users.noreply.github.com",
-		"url": "https://github.com/ryansonshine"
+		"name": "Konstantin Borisov",
+		"email": "smeagol74@gmail.com",
+		"url": "https://github.com/smeagol74"
 	},
 	"keywords": [
-		"boilerplate",
 		"cli",
-		"template",
-		"typescript",
-		"vscode",
-		"jest",
-		"husky",
-		"commitizen",
-		"semantic-release",
-		"codecov"
+		"orfogrammatika",
+		"orfogrammka",
+		"litera5",
+		"api",
+		"javascript",
+		"typescript"
 	],
 	"bin": {
 		"l5-api": "./bin/index.js"
@@ -46,7 +43,8 @@
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
 		"typecheck": "tsc --noEmit",
-		"watch": "tsc -w"
+		"watch": "tsc -w",
+		"start": "yarn build; node ./bin/index.js"
 	},
 	"dependencies": {
 		"commander": "^7.2.0",

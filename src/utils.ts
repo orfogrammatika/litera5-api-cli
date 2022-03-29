@@ -13,9 +13,10 @@ export function loadTextFile(path: string): string {
 	return data.toString();
 }
 
-export function saveTextFile(name: string, content: string, path?: string): void {
-	const filePath = `${path ?? process.cwd()}/name`;
+export function saveTextFile(name: string, content: string, path?: string): string {
+	const filePath = `${path ?? process.cwd()}/${name}`;
 	fs.writeFileSync(filePath, content);
+	return filePath;
 }
 
 export function loadObjectFile(path: string): unknown {

@@ -1,0 +1,13 @@
+---
+onSaveCorrected: http://example.com/save-corrected/
+onIFrameFailure: http://example.com/iframe-failure/
+onInitialStats: http://example.com/initial-stats/
+# returnIcon:
+returnCaption: Запомнить
+# cancelIcon:
+cancelCaption: Забыть
+allowResizeImages: false
+showCancelButton: true
+# editorCss:
+getStats: true
+hideEditorToolbar: false

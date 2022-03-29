@@ -132,7 +132,7 @@ program
 
 program
 	.command('check-ogxt')
-	.description('')
+	.description('Неинтерактивная проверка документа, запрос, ожидание результатов, запись результатов проверки в файл.')
 	.option('-j, --json <json-string>', 'JSON модель запроса на проверку', val => JSON.parse(val) as CheckRequest)
 	.option('-f, --file <json-yml-file>', 'JSON/YAML модель запроса на проверку, взятая из файла', loadObjectFile)
 	.option(
@@ -175,12 +175,20 @@ program
 						})
 						.then(res => {
 							log.info('Готовность:', clean(res));
+							let result: any = {};
 							switch (res.state) {
 								case CheckState.CHECKED_SUCCESS:
 									log.info('Проверка успешно завершена.');
-									saveTextFile(`${resp.check}.html`, res.html ?? '', args.result);
-									saveTextFile(`${resp.check}.annotations.json`, JSON.stringify(res.annotations, null, 2), args.result);
-									saveTextFile(`${resp.check}.stats.json`, JSON.stringify(res.stats, null, 2), args.result);
+									result = {
+										html: saveTextFile(`${resp.check}.html`, res.html ?? '', args.result),
+										annotations: saveTextFile(
+											`${resp.check}.annotations.json`,
+											JSON.stringify(res.annotations, null, 2),
+											args.result
+										),
+										stats: saveTextFile(`${resp.check}.stats.json`, JSON.stringify(res.stats, null, 2), args.result),
+									};
+									log.info('Результаты сохранены в файлах', result);
 									break;
 								case CheckState.ESTIMATED_ERROR:
 								case CheckState.ESTIMATED_REJECT:
