@@ -2665,7 +2665,7 @@ lines-and-columns@^1.1.6:
 
 litera5-api-js-client@orfogrammatika/litera5-api-js-client:
   version "1.0.20170412"
-  resolved "https://codeload.github.com/orfogrammatika/litera5-api-js-client/tar.gz/6c9fc9ccfdd3745472f2620564b7f496251aa359"
+  resolved "https://codeload.github.com/orfogrammatika/litera5-api-js-client/tar.gz/89016817f74ea10d5c47bf2854c3aa06323fb0d1"
   dependencies:
     js-logger "^1.6.1"
     lodash "^4.17.21"
