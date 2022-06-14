@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import Logger from 'js-logger';
-import { CheckOgxtRequest, CheckRequest, CheckState, SetupRequest, UserRequest } from 'litera5-api-js-client';
+import { CheckOgxtRequest, CheckRequest, CheckState, SetupRequest, UserRequest, UserApiPasswordRequest } from 'litera5-api-js-client';
 import _ from 'lodash';
 import { clean, loadObjectFile, loadTextFile, setupActionAndGetApi, saveTextFile } from './utils';
 import { html2ogxt } from 'ogxt-utils';
@@ -98,6 +98,32 @@ program
 				.catch(error => log.error(error));
 		} else {
 			log.error('Необходимо задать модель пользователя в параметрах --json или --file');
+		}
+	});
+
+program
+	.command('user-api-password')
+	.description('Управление специальным паролем пользователя для API')
+	.option(
+		'-j, --json <json-string>',
+		'JSON модель запроса на работу с API паролем пользователя',
+		val => JSON.parse(val) as UserApiPasswordRequest
+	)
+	.option('-f, --file <json-yml-file>', 'JSON/YAML модель запроса, взятая из файла', loadObjectFile)
+	.action(args => {
+		const api = setupActionAndGetApi(program.opts());
+		log.info('Настриваем API пароль пользователя:');
+		const json: UserApiPasswordRequest = args.json ?? args.file;
+		if (json) {
+			log.info('- настраиваем', json);
+			api
+				.userApiPassword(json)
+				.then(resp => {
+					log.info('Готово, API пароль пользователя настроен:', clean(resp));
+				})
+				.catch(error => log.error(error));
+		} else {
+			log.error('Необходимо задать модель запроса в параметрах --json или --file');
 		}
 	});
 

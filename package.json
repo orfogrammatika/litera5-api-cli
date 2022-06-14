@@ -1,6 +1,6 @@
 {
 	"name": "litera5-api-cli",
-	"version": "1.0.0",
+	"version": "1.1.20220612",
 	"description": "Приложание командной строки для работы с API Литера5",
 	"license": "GPL-3.0",
 	"engines": {
@@ -51,9 +51,9 @@
 		"js-logger": "^1.6.1",
 		"js-yaml": "^4.1.0",
 		"jsdom": "^19.0.0",
-		"litera5-api-js-client": "orfogrammatika/litera5-api-js-client",
+		"litera5-api-js-client": "orfogrammatika/litera5-api-js-client#1.1.20220612",
 		"lodash": "^4.17.21",
-		"ogxt-utils": "orfogrammatika/ogxt-utils"
+		"ogxt-utils": "orfogrammatika/ogxt-utils#2.0.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^26.0.24",
