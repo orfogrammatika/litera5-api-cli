@@ -47,6 +47,9 @@ export function loadConfigFromOpts(opts: any): Config {
 		if (_.has(opts.cfg, 'secret')) {
 			result.secret = opts.cfg.secret;
 		}
+		if (_.has(opts.cfg, 'userPassword')) {
+			result.userPassword = opts.cfg.userPassword;
+		}
 	}
 	if (_.has(opts, 'url')) {
 		result.url = opts.url;
@@ -56,6 +59,9 @@ export function loadConfigFromOpts(opts: any): Config {
 	}
 	if (_.has(opts, 'secret')) {
 		result.secret = opts.secret;
+	}
+	if (_.has(opts, 'userPassword')) {
+		result.userPassword = opts.userPassword;
 	}
 	return result;
 }
@@ -73,7 +79,15 @@ export function setupActionAndGetApi(opts: OptionValues): Litera5Api {
 
 	log.debug('Configuration:', cfg);
 
-	return createApi(cfg.client, cfg.secret, cfg.url, Logger.getLevel());
+	return createApi(
+		{
+			company: cfg.client,
+			secret: cfg.secret,
+			url: cfg.url,
+			userApiPassword: cfg.userPassword,
+		},
+		Logger.getLevel()
+	);
 }
 
 export function clean(obj: any): any {

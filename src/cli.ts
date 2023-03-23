@@ -1,6 +1,13 @@
 import { Command } from 'commander';
 import Logger from 'js-logger';
-import { CheckOgxtRequest, CheckRequest, CheckState, SetupRequest, UserRequest, UserApiPasswordRequest } from 'litera5-api-js-client';
+import {
+	CheckOgxtRequest,
+	CheckRequest,
+	CheckState,
+	SetupRequest,
+	UserRequest,
+	UserApiPasswordRequest,
+} from 'litera5-api-js-client';
 import _ from 'lodash';
 import { clean, loadObjectFile, loadTextFile, setupActionAndGetApi, saveTextFile } from './utils';
 import { html2ogxt } from 'ogxt-utils';
@@ -25,6 +32,15 @@ const log = Logger.get('cli');
 
 const program = new Command();
 
+const logError = (error: Response) => {
+	if (error.status && error.statusText) {
+		log.error(`${error.status} - ${error.statusText}`);
+		void error.text().then(txt => log.error(txt));
+	} else {
+		log.error(error);
+	}
+};
+
 program
 	.version(version)
 	.name('l5-api')
@@ -33,6 +49,7 @@ program
 	.option('-u, --url <string>', 'базовый адрес сервера')
 	.option('-l, --client <strint>', 'имя входа клиента')
 	.option('-s, --secret <string>', 'секретный ключ клиента')
+	.option('-p, --userPassword <string>', 'специальный пароль пользователя для API')
 	.option('-c, --cfg <json-yml-file>', 'JSON/YML файл с настройками API', loadObjectFile);
 
 program
@@ -61,9 +78,7 @@ program
 					delete resp.signature;
 					log.info('Готово, настройки установлены:', resp);
 				})
-				.catch(error => {
-					log.error(error);
-				});
+				.catch(logError);
 		} else {
 			log.info('- получаем');
 			api
@@ -71,7 +86,7 @@ program
 				.then(resp => {
 					log.info('Готово, настройки получены:', clean(resp));
 				})
-				.catch(error => log.error(error));
+				.catch(logError);
 		}
 	});
 
@@ -95,7 +110,7 @@ program
 				.then(resp => {
 					log.info('Готово, пользователь настроен:', clean(resp));
 				})
-				.catch(error => log.error(error));
+				.catch(logError);
 		} else {
 			log.error('Необходимо задать модель пользователя в параметрах --json или --file');
 		}
@@ -121,7 +136,7 @@ program
 				.then(resp => {
 					log.info('Готово, API пароль пользователя настроен:', clean(resp));
 				})
-				.catch(error => log.error(error));
+				.catch(logError);
 		} else {
 			log.error('Необходимо задать модель запроса в параметрах --json или --file');
 		}
@@ -150,7 +165,36 @@ program
 				.then(resp => {
 					log.info('Готово, проверка инициирована:', clean(resp));
 				})
-				.catch(error => log.error(error));
+				.catch(logError);
+		} else {
+			log.error('Необходимо задать модель запроса на проверку в параметрах --json или --file');
+		}
+	});
+
+program
+	.command('user-check')
+	.description('Запуск интерактивной проверки документа от лица пользователя')
+	.option('-j, --json <json-string>', 'JSON модель запроса на проверку', val => JSON.parse(val) as CheckRequest)
+	.option('-f, --file <json-yml-file>', 'JSON/YAML модель запроса на проверку, взятая из файла', loadObjectFile)
+	.option(
+		'-t, --html <html-file>',
+		'HTML файл с текстом на проверку, если указан, то переписывает содержимым файла параметр html запроса',
+		loadTextFile
+	)
+	.action(args => {
+		const api = setupActionAndGetApi(program.opts());
+		const json: CheckRequest = args.json ?? args.file;
+		if (json) {
+			if (args.html) {
+				json.html = args.html;
+			}
+			log.info('Начинаем проверку:', _.omit(json, ['html']));
+			api
+				.userCheck(json)
+				.then(resp => {
+					log.info('Готово, проверка инициирована:', clean(resp));
+				})
+				.catch(logError);
 		} else {
 			log.error('Необходимо задать модель запроса на проверку в параметрах --json или --file');
 		}
@@ -227,12 +271,12 @@ program
 									setTimeout(checkResults, 1000);
 							}
 						})
-						.catch(error => log.error(error));
+						.catch(logError);
 				};
 
 				setTimeout(checkResults, 1000);
 			})
-			.catch(error => log.error(error));
+			.catch(logError);
 	});
 
 program.parse(process.argv);
