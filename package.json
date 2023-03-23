@@ -1,6 +1,6 @@
 {
 	"name": "litera5-api-cli",
-	"version": "1.1.20220612",
+	"version": "1.2.20230323",
 	"description": "Приложание командной строки для работы с API Литера5",
 	"license": "GPL-3.0",
 	"engines": {
