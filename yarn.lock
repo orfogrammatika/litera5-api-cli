@@ -2663,9 +2663,9 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-litera5-api-js-client@orfogrammatika/litera5-api-js-client:
-  version "1.0.20170412"
-  resolved "https://codeload.github.com/orfogrammatika/litera5-api-js-client/tar.gz/89016817f74ea10d5c47bf2854c3aa06323fb0d1"
+litera5-api-js-client@orfogrammatika/litera5-api-js-client#1.1.20220612:
+  version "1.1.20220612"
+  resolved "https://codeload.github.com/orfogrammatika/litera5-api-js-client/tar.gz/51a63d29264904c2e884b49d1e6459dfe79c1af4"
   dependencies:
     js-logger "^1.6.1"
     lodash "^4.17.21"
@@ -2820,7 +2820,7 @@ nwsapi@^2.2.0:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-ogxt-utils@orfogrammatika/ogxt-utils:
+ogxt-utils@orfogrammatika/ogxt-utils#2.0.0:
   version "2.0.0"
   resolved "https://codeload.github.com/orfogrammatika/ogxt-utils/tar.gz/8f0b1a2c23522cb2f86d093fa93a6c4fd2e286b0"
   dependencies:
